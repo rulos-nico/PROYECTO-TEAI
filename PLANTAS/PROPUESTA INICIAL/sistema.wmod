@@ -1,0 +1,399 @@
+<?xml version="1.0" encoding="windows-1252"?>
+<Module xmlns="http://waters.sourceforge.net/xsd/module" xmlns:B="http://waters.sourceforge.net/xsd/base" Name="sistema">
+<EventDeclList>
+<EventDecl Kind="CONTROLLABLE" Name="E1"/>
+<EventDecl Kind="UNCONTROLLABLE" Name="T1"/>
+<EventDecl Kind="UNCONTROLLABLE" Name="F1"/>
+<EventDecl Kind="CONTROLLABLE" Name="R1"/>
+<EventDecl Kind="CONTROLLABLE" Name="E2"/>
+<EventDecl Kind="CONTROLLABLE" Name="E3"/>
+<EventDecl Kind="CONTROLLABLE" Name="E4"/>
+<EventDecl Kind="UNCONTROLLABLE" Name="F2"/>
+<EventDecl Kind="UNCONTROLLABLE" Name="F3"/>
+<EventDecl Kind="UNCONTROLLABLE" Name="F4"/>
+<EventDecl Kind="CONTROLLABLE" Name="R2"/>
+<EventDecl Kind="CONTROLLABLE" Name="R3"/>
+<EventDecl Kind="CONTROLLABLE" Name="R4"/>
+<EventDecl Kind="UNCONTROLLABLE" Name="T2"/>
+<EventDecl Kind="UNCONTROLLABLE" Name="T3"/>
+<EventDecl Kind="UNCONTROLLABLE" Name="T4"/>
+<EventDecl Kind="CONTROLLABLE" Name="ARRIVE_BB"/>
+<EventDecl Kind="CONTROLLABLE" Name="ARRIVE_BL"/>
+<EventDecl Kind="CONTROLLABLE" Name="ARRIVE_GB"/>
+<EventDecl Kind="CONTROLLABLE" Name="ARRIVE_GL"/>
+<EventDecl Kind="CONTROLLABLE" Name="LEAVE_BB"/>
+<EventDecl Kind="CONTROLLABLE" Name="LEAVE_GB"/>
+<EventDecl Kind="CONTROLLABLE" Name="LEAVE_GL"/>
+<EventDecl Kind="CONTROLLABLE" Name="LEAVE_BL"/>
+</EventDeclList>
+<ComponentList>
+<SimpleComponent Kind="PLANT" Name="M1">
+<Graph>
+<NodeList>
+<SimpleNode Initial="true" Name="S0">
+<PointGeometry>
+<Point X="80" Y="80"/>
+</PointGeometry>
+<LabelGeometry Anchor="NW">
+<Point X="0" Y="10"/>
+</LabelGeometry>
+</SimpleNode>
+<SimpleNode Name="S1">
+<PointGeometry>
+<Point X="208" Y="80"/>
+</PointGeometry>
+<LabelGeometry Anchor="NW">
+<Point X="0" Y="10"/>
+</LabelGeometry>
+</SimpleNode>
+<SimpleNode Name="S2">
+<PointGeometry>
+<Point X="144" Y="192"/>
+</PointGeometry>
+<LabelGeometry Anchor="NW">
+<Point X="0" Y="10"/>
+</LabelGeometry>
+</SimpleNode>
+</NodeList>
+<EdgeList>
+<Edge Source="S0" Target="S1">
+<LabelBlock>
+<SimpleIdentifier Name="E1"/>
+</LabelBlock>
+<SplineGeometry>
+<Point X="144" Y="64"/>
+</SplineGeometry>
+</Edge>
+<Edge Source="S1" Target="S0">
+<LabelBlock>
+<SimpleIdentifier Name="T1"/>
+</LabelBlock>
+<SplineGeometry>
+<Point X="144" Y="96"/>
+</SplineGeometry>
+</Edge>
+<Edge Source="S1" Target="S2">
+<LabelBlock>
+<SimpleIdentifier Name="F1"/>
+</LabelBlock>
+</Edge>
+<Edge Source="S2" Target="S0">
+<LabelBlock>
+<SimpleIdentifier Name="R1"/>
+</LabelBlock>
+</Edge>
+</EdgeList>
+</Graph>
+</SimpleComponent>
+<SimpleComponent Kind="PLANT" Name="M2">
+<Graph>
+<NodeList>
+<SimpleNode Initial="true" Name="S0">
+<PointGeometry>
+<Point X="80" Y="64"/>
+</PointGeometry>
+<LabelGeometry Anchor="NW">
+<Point X="0" Y="10"/>
+</LabelGeometry>
+</SimpleNode>
+<SimpleNode Name="S1">
+<PointGeometry>
+<Point X="208" Y="64"/>
+</PointGeometry>
+<LabelGeometry Anchor="NW">
+<Point X="0" Y="10"/>
+</LabelGeometry>
+</SimpleNode>
+<SimpleNode Name="S2">
+<PointGeometry>
+<Point X="144" Y="176"/>
+</PointGeometry>
+<LabelGeometry Anchor="NW">
+<Point X="0" Y="10"/>
+</LabelGeometry>
+</SimpleNode>
+</NodeList>
+<EdgeList>
+<Edge Source="S0" Target="S1">
+<LabelBlock>
+<SimpleIdentifier Name="E2"/>
+</LabelBlock>
+<SplineGeometry>
+<Point X="144" Y="48"/>
+</SplineGeometry>
+</Edge>
+<Edge Source="S1" Target="S2">
+<LabelBlock>
+<SimpleIdentifier Name="F2"/>
+</LabelBlock>
+</Edge>
+<Edge Source="S2" Target="S0">
+<LabelBlock>
+<SimpleIdentifier Name="R2"/>
+</LabelBlock>
+</Edge>
+<Edge Source="S1" Target="S0">
+<LabelBlock>
+<SimpleIdentifier Name="T2"/>
+</LabelBlock>
+<SplineGeometry>
+<Point X="144" Y="80"/>
+</SplineGeometry>
+</Edge>
+</EdgeList>
+</Graph>
+</SimpleComponent>
+<SimpleComponent Kind="PLANT" Name="M3">
+<Graph>
+<NodeList>
+<SimpleNode Initial="true" Name="S0">
+<PointGeometry>
+<Point X="48" Y="64"/>
+</PointGeometry>
+<LabelGeometry Anchor="NW">
+<Point X="0" Y="10"/>
+</LabelGeometry>
+</SimpleNode>
+<SimpleNode Name="S1">
+<PointGeometry>
+<Point X="176" Y="64"/>
+</PointGeometry>
+<LabelGeometry Anchor="NW">
+<Point X="0" Y="10"/>
+</LabelGeometry>
+</SimpleNode>
+<SimpleNode Name="S2">
+<PointGeometry>
+<Point X="112" Y="176"/>
+</PointGeometry>
+<LabelGeometry Anchor="NW">
+<Point X="0" Y="10"/>
+</LabelGeometry>
+</SimpleNode>
+</NodeList>
+<EdgeList>
+<Edge Source="S0" Target="S1">
+<LabelBlock>
+<SimpleIdentifier Name="E3"/>
+</LabelBlock>
+<SplineGeometry>
+<Point X="112" Y="48"/>
+</SplineGeometry>
+</Edge>
+<Edge Source="S1" Target="S0">
+<LabelBlock>
+<SimpleIdentifier Name="T3"/>
+</LabelBlock>
+<SplineGeometry>
+<Point X="112" Y="80"/>
+</SplineGeometry>
+</Edge>
+<Edge Source="S1" Target="S2">
+<LabelBlock>
+<SimpleIdentifier Name="F3"/>
+</LabelBlock>
+</Edge>
+<Edge Source="S2" Target="S0">
+<LabelBlock>
+<SimpleIdentifier Name="R3"/>
+</LabelBlock>
+</Edge>
+</EdgeList>
+</Graph>
+</SimpleComponent>
+<SimpleComponent Kind="PLANT" Name="M4">
+<Graph>
+<NodeList>
+<SimpleNode Initial="true" Name="S0">
+<PointGeometry>
+<Point X="112" Y="112"/>
+</PointGeometry>
+<LabelGeometry Anchor="NW">
+<Point X="0" Y="10"/>
+</LabelGeometry>
+</SimpleNode>
+<SimpleNode Name="S1">
+<PointGeometry>
+<Point X="240" Y="112"/>
+</PointGeometry>
+<LabelGeometry Anchor="NW">
+<Point X="0" Y="10"/>
+</LabelGeometry>
+</SimpleNode>
+<SimpleNode Name="S2">
+<PointGeometry>
+<Point X="176" Y="224"/>
+</PointGeometry>
+<LabelGeometry Anchor="NW">
+<Point X="0" Y="10"/>
+</LabelGeometry>
+</SimpleNode>
+</NodeList>
+<EdgeList>
+<Edge Source="S0" Target="S1">
+<LabelBlock>
+<SimpleIdentifier Name="E4"/>
+</LabelBlock>
+<SplineGeometry>
+<Point X="176" Y="96"/>
+</SplineGeometry>
+</Edge>
+<Edge Source="S1" Target="S0">
+<LabelBlock>
+<SimpleIdentifier Name="T4"/>
+</LabelBlock>
+<SplineGeometry>
+<Point X="176" Y="128"/>
+</SplineGeometry>
+</Edge>
+<Edge Source="S1" Target="S2">
+<LabelBlock>
+<SimpleIdentifier Name="F4"/>
+</LabelBlock>
+</Edge>
+<Edge Source="S2" Target="S0">
+<LabelBlock>
+<SimpleIdentifier Name="R4"/>
+</LabelBlock>
+</Edge>
+</EdgeList>
+</Graph>
+</SimpleComponent>
+<SimpleComponent Kind="PLANT" Name="SELECTOR">
+<Graph>
+<NodeList>
+<SimpleNode Initial="true" Name="S0">
+<PointGeometry>
+<Point X="176" Y="208"/>
+</PointGeometry>
+<LabelGeometry Anchor="NW">
+<Point X="0" Y="10"/>
+</LabelGeometry>
+</SimpleNode>
+<SimpleNode Name="S1">
+<PointGeometry>
+<Point X="64" Y="96"/>
+</PointGeometry>
+<LabelGeometry Anchor="NW">
+<Point X="0" Y="10"/>
+</LabelGeometry>
+</SimpleNode>
+<SimpleNode Name="S2">
+<PointGeometry>
+<Point X="288" Y="96"/>
+</PointGeometry>
+<LabelGeometry Anchor="NW">
+<Point X="0" Y="10"/>
+</LabelGeometry>
+</SimpleNode>
+<SimpleNode Name="S3">
+<PointGeometry>
+<Point X="288" Y="320"/>
+</PointGeometry>
+<LabelGeometry Anchor="NW">
+<Point X="0" Y="10"/>
+</LabelGeometry>
+</SimpleNode>
+<SimpleNode Name="S4">
+<PointGeometry>
+<Point X="64" Y="304"/>
+</PointGeometry>
+<LabelGeometry Anchor="NW">
+<Point X="0" Y="10"/>
+</LabelGeometry>
+</SimpleNode>
+</NodeList>
+<EdgeList>
+<Edge Source="S0" Target="S1">
+<LabelBlock>
+<SimpleIdentifier Name="ARRIVE_BB"/>
+<LabelGeometry Anchor="NW">
+<Point X="-79" Y="-14"/>
+</LabelGeometry>
+</LabelBlock>
+<SplineGeometry>
+<Point X="101" Y="171"/>
+</SplineGeometry>
+</Edge>
+<Edge Source="S0" Target="S2">
+<LabelBlock>
+<SimpleIdentifier Name="ARRIVE_GB"/>
+<LabelGeometry Anchor="NW">
+<Point X="-18" Y="-43"/>
+</LabelGeometry>
+</LabelBlock>
+<SplineGeometry>
+<Point X="207" Y="127"/>
+</SplineGeometry>
+</Edge>
+<Edge Source="S0" Target="S3">
+<LabelBlock>
+<SimpleIdentifier Name="ARRIVE_GL"/>
+<LabelGeometry Anchor="NW">
+<Point X="11" Y="-6"/>
+</LabelGeometry>
+</LabelBlock>
+<SplineGeometry>
+<Point X="253" Y="243"/>
+</SplineGeometry>
+</Edge>
+<Edge Source="S0" Target="S4">
+<LabelBlock>
+<SimpleIdentifier Name="ARRIVE_BL"/>
+<LabelGeometry Anchor="NW">
+<Point X="-27" Y="21"/>
+</LabelGeometry>
+</LabelBlock>
+<SplineGeometry>
+<Point X="135" Y="274"/>
+</SplineGeometry>
+</Edge>
+<Edge Source="S1" Target="S0">
+<LabelBlock>
+<SimpleIdentifier Name="LEAVE_BB"/>
+<LabelGeometry Anchor="NW">
+<Point X="-41" Y="-45"/>
+</LabelGeometry>
+</LabelBlock>
+<SplineGeometry>
+<Point X="139" Y="133"/>
+</SplineGeometry>
+</Edge>
+<Edge Source="S2" Target="S0">
+<LabelBlock>
+<SimpleIdentifier Name="LEAVE_GB"/>
+<LabelGeometry Anchor="NW">
+<Point X="24" Y="-30"/>
+</LabelGeometry>
+</LabelBlock>
+<SplineGeometry>
+<Point X="257" Y="177"/>
+</SplineGeometry>
+</Edge>
+<Edge Source="S3" Target="S0">
+<LabelBlock>
+<SimpleIdentifier Name="LEAVE_GL"/>
+<LabelGeometry Anchor="NW">
+<Point X="-17" Y="25"/>
+</LabelGeometry>
+</LabelBlock>
+<SplineGeometry>
+<Point X="211" Y="285"/>
+</SplineGeometry>
+</Edge>
+<Edge Source="S4" Target="S0">
+<LabelBlock>
+<SimpleIdentifier Name="LEAVE_BL"/>
+<LabelGeometry Anchor="NW">
+<Point X="-85" Y="14"/>
+</LabelGeometry>
+</LabelBlock>
+<SplineGeometry>
+<Point X="105" Y="238"/>
+</SplineGeometry>
+</Edge>
+</EdgeList>
+</Graph>
+</SimpleComponent>
+</ComponentList>
+</Module>
