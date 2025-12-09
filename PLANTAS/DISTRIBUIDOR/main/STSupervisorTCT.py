@@ -389,8 +389,8 @@ class process:
 
         RANDOM = "FUNCTION_BLOCK random_number\n\tVAR_INPUT\n\t\tIN : BOOL;\n\tEND_VAR\n\tVAR\n\t\tM : BOOL;"
         RANDOM += "\n\t\tINIT : BOOL;\n\tEND_VAR\n\tVAR_OUTPUT\n\t\tOUT : DINT;\n\tEND_VAR\n"
-        RANDOM += "\n\tIF INIT = 0 THEN\n\t\t{#include <stdio.h>}\n\t\t{#include <stdlib.h>}\n\t\tIN := 1;\n\tEND_IF;"
-        RANDOM += "\n\tIF M = 0 and IN = 1 THEN\n\t\t{SetFbVar(OUT,rand())}\n\tEND_IF;\nEND_FUNCTION_BLOCK\n"
+        RANDOM += "\n\tIF NOT INIT THEN\n\t\t{#include <stdio.h>}\n\t\t{#include <stdlib.h>}\n\t\tIN := 1;\n\tEND_IF;"
+        RANDOM += "\n\tIF NOT M AND IN THEN\n\t\t{SetFbVar(OUT,rand())}\n\tEND_IF;\nEND_FUNCTION_BLOCK\n"
         HEADER = "PROGRAM tesis0\n"
         END = "\nEND_PROGRAM\n\n"
         END += "CONFIGURATION Config0\n\n\tRESOURCE Res0 ON PLC\n\t\tTASK task0(INTERVAL := T#20ms,PRIORITY := 0);"
@@ -495,7 +495,7 @@ class process:
                 out_aux = [f"\t{linea}" for linea in out_aux]
                 out_aux = '\n'.join(out_aux)
                 out += ('\tIF NOT initial THEN\n\t\tIF ' + actuators[initial].split(':')[
-                    0] + ' THEN\n\t\t\tinitial := 1;\n\t\tEND_IF;\n\tELSIF initial THEN\n'
+                    0] + ' THEN\n\t\t\tinitial := TRUE;\n\t\tEND_IF;\n\tELSIF initial THEN\n'
                         + out_aux + '\n\tEND_IF;' + END)
         if not os.path.exists('ST_Generated'):
             os.makedirs('ST_Generated')
@@ -549,7 +549,7 @@ class process:
             out_aux = [f"\t{linea}" for linea in out_aux]
             out_aux = '\n'.join(out_aux)
             out += ('\tIF NOT initial THEN\n\t\tIF ' + actuators[initial].split(':')[
-                0] + ' THEN\n\t\t\tinitial := 1;\n\t\tEND_IF;\n\tELSIF initial THEN\n'
+                0] + ' THEN\n\t\t\tinitial := TRUE;\n\t\tEND_IF;\n\tELSIF initial THEN\n'
                     + out_aux + '\n\tEND_IF;' + END)
         return out
 

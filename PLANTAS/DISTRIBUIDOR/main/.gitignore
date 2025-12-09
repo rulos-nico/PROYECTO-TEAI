@@ -1,0 +1,15 @@
+# Carpetas generadas por TCT
+MESA_ROTATORIA/
+ST_Generated/
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+
+# Archivos temporales
+*.log
+*.tmp
+*~
