@@ -21,6 +21,7 @@ actuators['rechazado_on'] = 'GD_OUT_5:ON:%QX100.5'
 actuators['rechazado_off'] = 'GD_OUT_5:OFF'
 actuators['giro_on'] = 'GD_OUT_6:ON:%QX100.6'
 actuators['giro_off'] = 'GD_OUT_6:OFF'
+actuators['encendido_total_on'] = 'GD_OUT_7:ON:%QX100.7'
 # ---- EVENTOS NO CONTROLABLES (SENSORES/ENTRADAS) ----
 actuators['l2_p1'] = 'RE_l2p1:GD_IN_0:%IX100.0'
 actuators['l1_p1'] = 'RE_l1p1:GD_IN_1:%IX100.1'
@@ -64,6 +65,13 @@ p.add_transition(B1,transitions=[(0,1),(1,0)],events=['banda1_off','banda1_on'],
 Mesa = p.new_automaton('Mesa')
 p.add_state(Mesa, 10, [], [True,True,True,True,True,True,True,True,True,True])
 p.add_transition(Mesa,transitions=[(0,1),(0,1),(1,2),(1,2),(2,3),(3,4),(4,5),(5,6),(6,0),(3,7),(7,8),(8,9),(9,0)],events=['banda2_on','banda1_on','azul','verde','giro_on','aceptado_on','salida_aceptado','aceptado_off','giro_off','rechazado_on','salida_rechazado','rechazado_off','giro_off'],uncontrollable=['azul','verde','salida_aceptado','salida_rechazado'])
+# ==========================================================
+# Encendido Total
+# ==========================================================
+Encendido = p.new_automaton('Encendido')
+p.add_state(Encendido,2,[],[True,True])
+p.add_transition(Encendido,transitions=[(0,1),(1,1),(1,1),(1,1),(1,1)],events=['encendido_total_on','l1_on','l2_on','banda1_on','banda2_on'],uncontrollable=['l1_on','l2_on','banda1_on','banda2_on'])
+
 # ##########################################################
 # PARTE 2: DEFINICIÓN DE ESPECIFICACIONES
 # ##########################################################
@@ -74,34 +82,36 @@ p.add_transition(Mesa,transitions=[(0,1),(0,1),(1,2),(1,2),(2,3),(3,4),(4,5),(5,
 REQ_envio2=p.new_automaton('REQ_envio2')
 p.add_state(REQ_envio2,5,[],[True,True,True,True,True])
 p.add_transition(REQ_envio2,transitions=[(0,1),(1,2),(2,3),(3,4),(4,0)],events=['l2_on','l2_off','l2_p1','banda2_off','banda2_on'],uncontrollable=['l2_p1'])
-p.add_self_event(REQ_envio2,'l2_p1')
-p.complete_spec(REQ_envio2)
+""" p.add_self_event(REQ_envio2,'l2_p1') """
+""" p.complete_spec(REQ_envio2) """
 # ==========================================================
 # Envio 1
 # ==========================================================
 REQ_envio1=p.new_automaton('REQ_envio1')
 p.add_state(REQ_envio1,5,[],[True,True,True,True,True])
 p.add_transition(REQ_envio1,transitions=[(0,1),(1,2),(2,3),(3,4),(4,0)],events=['l1_on','l1_off','l1_p1','banda1_off','banda1_on'],uncontrollable=['l1_p1'])
-p.add_self_event(REQ_envio1,'l1_p1')
-p.complete_spec(REQ_envio1)
+""" p.add_self_event(REQ_envio1,'l1_p1') """
+""" p.complete_spec(REQ_envio1) """
 # ==========================================================
 # OrdenEnvio
 # ==========================================================
 REQ_orden=p.new_automaton('REQ_orden')
 p.add_state(REQ_orden,5,[],[True,True,True,True,True])
-p.add_transition(REQ_orden,transitions=[(0,1),(1,0),(1,2),(2,3),(0,3),(3,4),(3,0),(4,1)],events=['l1_p1','banda1_on','l2_p1','banda1_on','l2_p1','l1_p1','banda2_on','banda2_on'],uncontrollable=['l1_p1','l2_p1'])
-p.add_self_event(REQ_orden,'l1_p1')
-p.add_self_event(REQ_orden,'l2_p1')
-p.complete_spec(REQ_orden)
+p.add_transition(REQ_orden,transitions=[(0,1),(1,0),(1,2),(2,3),(0,3),(3,4),(3,0),(4,1)],
+                 events=['l1_p1','banda1_on','l2_p1','banda1_on','l2_p1','l1_p1','banda2_on','banda2_on'],uncontrollable=['l1_p1','l2_p1'])
+""" p.add_self_event(REQ_orden,'l1_p1')
+p.add_self_event(REQ_orden,'l2_p1') """
+""" p.complete_spec(REQ_orden) """
 # ==========================================================
 # OrdenColor
 # ==========================================================
 REQ_color=p.new_automaton('REQ_color')
 p.add_state(REQ_color,7,[],[True,True,True,True,True,True,True])
-p.add_transition(REQ_color,transitions=[(0,1),(1,2),(2,3),(3,2),(0,4),(4,5),(5,6),(6,5),(2,4),(5,1)],events=['verde','aceptado_on','verde','rechazado_on','azul','aceptado_on','azul','rechazado_on','azul','verde'],uncontrollable=['azul','verde'])
-p.add_self_event(REQ_color,'azul')
-p.add_self_event(REQ_color,'verde')
-p.complete_spec(REQ_color)
+p.add_transition(REQ_color,transitions=[(0,1),(1,2),(2,3),(3,2),(0,4),(4,5),(5,6),(6,5),(2,4),(5,1)],
+                 events=['verde','aceptado_on','verde','rechazado_on','azul','aceptado_on','azul','rechazado_on','azul','verde'],uncontrollable=['azul','verde'])
+""" p.add_self_event(REQ_color,'azul')
+p.add_self_event(REQ_color,'verde') """
+""" p.complete_spec(REQ_color) """
 
 p.generate_all_automata()
 
@@ -110,30 +120,20 @@ p.generate_all_automata()
 # ##########################################################
 
 Planta=p.automata_syncronize(['M2','M1','B2','B1','Mesa'],name_sync='PLANT')
-all=p.all_events(Planta,'ALL')
 
-Spect=p.automata_syncronize(['REQ_color','REQ_envio2','REQ_envio1','REQ_orden','ALL'],name_sync='Spect')
+Spect_orden_color = p.automata_syncronize(['REQ_orden','REQ_color','REQ_envio1','REQ_envio2','PLANT'],name_sync='Spect_orden_color')
+p.load_automata([Spect_orden_color])
 
-sup=p.supcon(Planta,Spect,'SUP')
 
-supdat=p.condat(Planta,sup,'SUPDAT')
-simsup=p.supreduce(Planta,sup,supdat,'SIMSUP')
-p.load_automata([Planta,sup])
-p.generate_ST_OPENPLC([sup],[Planta],actuators,'Mesa')
+supdat=p.condat(Planta,Spect_orden_color,'SUPDAT')
+p.load_automata([Planta,Spect_orden_color])
+p.generate_ST_OPENPLC([Spect_orden_color],[Planta],actuators,'Mesa')
 
-print ("RESULTADOS:")
-print("Automaton Planta:")
-print(p.get_automaton('PLANT'))
-print("\nAutomaton Especificacion:")
-print(p.get_automaton('REQ_envio2'))
-print("\nREQ_envio2:")
-print(p.get_automaton('REQ_envio1'))
-print("\nREQ_envio1:")
-print(p.get_automaton('REQ_orden'))
-print("\nREQ_orden:")
-print(p.get_automaton('REQ_color'))
-print("\nREQ_color:")
-print("\nSpecification (Sincro):")
-print(p.get_automaton('Spect'))
-print("\nAutomaton Supervisor:") 
-print(p.get_automaton('SUP'))
+print("\nAutomaton Especificacion Orden y Color:")
+print(p.get_automaton('Spect_orden_color'))
+
+
+
+
+
+
